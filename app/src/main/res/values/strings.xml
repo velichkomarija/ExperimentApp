@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="photo_description">Personal photo</string>
+    <string name="personal_name">Maria Velichko</string>
+    <string name="vk_link_description">VK</string>
+    <string name="telegram_link_description">Telegram</string>
+</resources>
