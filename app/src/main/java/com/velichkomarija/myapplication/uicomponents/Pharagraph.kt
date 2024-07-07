@@ -14,7 +14,8 @@ fun Paragraph(
     Text(
         stringResource(id = text),
         textAlign = TextAlign.Center,
-        style = MaterialTheme.typography.headlineLarge
+        style = MaterialTheme.typography.headlineLarge,
+        color = MaterialTheme.colorScheme.primary
     )
 }
 
