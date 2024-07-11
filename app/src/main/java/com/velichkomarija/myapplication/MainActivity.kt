@@ -5,8 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -26,6 +28,7 @@ import com.velichkomarija.myapplication.main.MainActivityUiState.Loading
 import com.velichkomarija.myapplication.main.MainActivityUiState.Success
 import com.velichkomarija.myapplication.main.MainActivityViewModel
 import com.velichkomarija.myapplication.ui.theme.MyApplicationTheme
+import com.velichkomarija.myapplication.uicomponents.ItemButton
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
@@ -37,7 +40,6 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
 
     private val viewModel: MainActivityViewModel by viewModels()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
@@ -64,13 +66,27 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MyApplicationTheme {
-
-                Scaffold(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) { innerPadding ->
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.background)
+                ) {
                     if (uiState is Success) {
                         Greeting(
                             userData = (uiState as Success).userData,
-                            modifier = Modifier.padding(innerPadding),
                         )
+                        LazyColumn {
+                            (uiState as Success).functions.forEach { functionData ->
+                                item {
+                                    ItemButton(
+                                        title = functionData.name,
+                                        description = functionData.description,
+                                        onClick = { },
+                                        modifier = Modifier.fillMaxSize()
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }

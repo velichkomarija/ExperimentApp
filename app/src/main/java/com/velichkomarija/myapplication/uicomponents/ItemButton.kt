@@ -18,13 +18,14 @@ import com.velichkomarija.myapplication.ui.theme.Typography
 @Composable
 fun ItemButton(
     title: String,
-    description: String,
+    description: String?,
     onClick: () -> Unit,
+    modifier: Modifier
 ) {
     Button(
         onClick = onClick,
         shape = RoundedCornerShape(8.dp),
-        modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp)
+        modifier = modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp)
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
@@ -33,13 +34,15 @@ fun ItemButton(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
-            Text(
-                modifier = Modifier.padding(top = 4.dp),
-                text = description,
-                style = Typography.bodySmall,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-            )
+            description?.let {
+                Text(
+                    modifier = Modifier.padding(top = 4.dp),
+                    text = it,
+                    style = Typography.bodySmall,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
         }
     }
 }
@@ -54,7 +57,8 @@ private fun ImageButtonPreview() {
                 title = "Пример",
                 description = "Очень очень очень очень очень очень очень " +
                         "очень очень очень очень очень очень длинное описание",
-                onClick = { }
+                onClick = { },
+                modifier = Modifier
             )
         }
     }
