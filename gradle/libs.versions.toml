@@ -18,6 +18,8 @@ hilt = "2.51.1"
 hiltExt = "1.2.0"
 ksp = "2.0.0-1.0.21"
 androidxBrowser = "1.8.0"
+androidxNavigation = "2.5.3"
+androidxLifecycle = "2.6.0-alpha03"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -49,6 +51,9 @@ androidx-browser = { group = "androidx.browser", name = "browser", version.ref =
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
 compose-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
+androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

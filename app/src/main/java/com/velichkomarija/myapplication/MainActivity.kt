@@ -38,7 +38,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     private val viewModel: MainActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,29 +65,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MyApplicationTheme {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background)
-                ) {
-                    if (uiState is Success) {
-                        Greeting(
-                            userData = (uiState as Success).userData,
-                        )
-                        LazyColumn {
-                            (uiState as Success).functions.forEach { functionData ->
-                                item {
-                                    ItemButton(
-                                        title = functionData.name,
-                                        description = functionData.description,
-                                        onClick = { },
-                                        modifier = Modifier.fillMaxSize()
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
+                NavGraph()
             }
         }
     }
