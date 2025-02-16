@@ -21,7 +21,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.velichkomarija.myapplication.ChromeTabsUtils
 import com.velichkomarija.myapplication.R
-import com.velichkomarija.myapplication.data.UserData
+import com.velichkomarija.myapplication.data.user.UserData
 import com.velichkomarija.myapplication.uicomponents.Paragraph
 import com.velichkomarija.myapplication.uicomponents.RoundImage
 import com.velichkomarija.myapplication.uicomponents.SquareButton

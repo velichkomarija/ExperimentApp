@@ -1,4 +1,4 @@
-package com.velichkomarija.myapplication.data
+package com.velichkomarija.myapplication.data.user
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

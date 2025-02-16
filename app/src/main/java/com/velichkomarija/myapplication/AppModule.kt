@@ -1,9 +1,9 @@
 package com.velichkomarija.myapplication
 
-import com.velichkomarija.myapplication.data.FunctionsDataRepository
-import com.velichkomarija.myapplication.data.LocalFunctionsDataRepository
-import com.velichkomarija.myapplication.data.LocalUserRepository
-import com.velichkomarija.myapplication.data.UserDataRepository
+import com.velichkomarija.myapplication.data.functions.FunctionsDataRepository
+import com.velichkomarija.myapplication.data.functions.LocalFunctionsDataRepository
+import com.velichkomarija.myapplication.data.user.LocalUserRepository
+import com.velichkomarija.myapplication.data.user.UserDataRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

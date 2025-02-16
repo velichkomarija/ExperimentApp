@@ -1,4 +1,4 @@
-package com.velichkomarija.myapplication.data
+package com.velichkomarija.myapplication.data.functions
 
 import kotlinx.coroutines.flow.Flow
 

@@ -1,4 +1,4 @@
-package com.velichkomarija.myapplication.data
+package com.velichkomarija.myapplication.data.user
 
 import com.velichkomarija.myapplication.DarkThemeConfig
 

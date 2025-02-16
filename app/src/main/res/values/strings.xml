@@ -4,4 +4,6 @@
     <string name="personal_name">Maria Velichko</string>
     <string name="vk_link_description">VK</string>
     <string name="telegram_link_description">Telegram</string>
+    <!-- Tasks !-->
+    <string name="add_task">Add new task</string>
 </resources>

@@ -2,10 +2,10 @@ package com.velichkomarija.myapplication.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.velichkomarija.myapplication.data.FunctionData
-import com.velichkomarija.myapplication.data.FunctionsDataRepository
-import com.velichkomarija.myapplication.data.UserData
-import com.velichkomarija.myapplication.data.UserDataRepository
+import com.velichkomarija.myapplication.data.functions.FunctionData
+import com.velichkomarija.myapplication.data.functions.FunctionsDataRepository
+import com.velichkomarija.myapplication.data.user.UserData
+import com.velichkomarija.myapplication.data.user.UserDataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

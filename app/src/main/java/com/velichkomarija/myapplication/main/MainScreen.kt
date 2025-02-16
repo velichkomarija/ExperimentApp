@@ -14,8 +14,9 @@ import com.velichkomarija.myapplication.main.MainActivityUiState.Success
 import com.velichkomarija.myapplication.uicomponents.ItemButton
 
 @Composable
-fun ProfileScreen(
-    viewModel: MainActivityViewModel = hiltViewModel()
+fun MainScreen(
+    viewModel: MainActivityViewModel = hiltViewModel(),
+    openTodoList: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     Column(
@@ -33,7 +34,7 @@ fun ProfileScreen(
                         ItemButton(
                             title = functionData.name,
                             description = functionData.description,
-                            onClick = { },
+                            onClick = { openTodoList.invoke() },
                             modifier = Modifier.fillMaxSize()
                         )
                     }
