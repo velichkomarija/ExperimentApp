@@ -1,6 +1,7 @@
 package com.velichkomarija.myapplication.todo
 
 import android.annotation.SuppressLint
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.FloatingActionButton
@@ -11,7 +12,9 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -22,8 +25,10 @@ import com.velichkomarija.myapplication.data.todo.Task
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun TodoScreen(
+    @StringRes userMessage: Int,
     onTaskClick: (Task) -> Unit,
     onAddNewTask: () -> Unit,
+    onUserMessageDisplayed: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: TodoViewModel = hiltViewModel(),
     scaffoldState: ScaffoldState = rememberScaffoldState()
@@ -45,5 +50,21 @@ fun TodoScreen(
             onTaskCheckedChange = viewModel::completeTask,
             modifier = Modifier.padding(paddingValues)
         )
+
+        uiState.userMessage?.let { message ->
+            val snackbarText = stringResource(message)
+            LaunchedEffect(scaffoldState, viewModel, message, snackbarText) {
+                scaffoldState.snackbarHostState.showSnackbar(snackbarText)
+                viewModel.snackbarMessageShown()
+            }
+        }
+
+        val currentOnUserMessageDisplayed by rememberUpdatedState(onUserMessageDisplayed)
+        LaunchedEffect(userMessage) {
+            if (userMessage != 0) {
+                viewModel.showEditResultMessage(userMessage)
+                currentOnUserMessageDisplayed()
+            }
+        }
     }
 }

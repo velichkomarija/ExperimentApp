@@ -4,6 +4,15 @@
     <string name="personal_name">Maria Velichko</string>
     <string name="vk_link_description">VK</string>
     <string name="telegram_link_description">Telegram</string>
+    <string name="menu_back">Back</string>
     <!-- Tasks !-->
     <string name="add_task">Add new task</string>
+    <string name="edit_task">Edit task</string>
+    <string name="empty_task_message">Task cannot be empty</string>
+    <string name="save_task">Save task</string>
+    <string name="title_hint">Title</string>
+    <string name="description_hint">Enter your task here.</string>
+    <string name="successfully_saved_task_message">Task saved</string>
+    <string name="successfully_added_task_message">Task added</string>
+    <string name="successfully_deleted_task_message">Task was deleted</string>
 </resources>

@@ -14,43 +14,12 @@ import javax.inject.Inject
 class LocalTaskRepository @Inject constructor(
     @DefaultDispatcher private val dispatcher: CoroutineDispatcher,
     private val localDataSource: TaskDao,
-): TaskRepository {
+) : TaskRepository {
 
     override fun getTasksFlow(): Flow<List<Task>> {
         return localDataSource.observeAll().map { tasks ->
             withContext(dispatcher) {
-                listOf(
-                    Task(
-                        title = "Title 1",
-                        description = "Description 1",
-                        isCompleted = false,
-                        id = "ID 1"
-                    ),
-                    Task(
-                        title = "Title 2",
-                        description = "Description 2",
-                        isCompleted = true,
-                        id = "ID 2"
-                    ),
-                    Task(
-                        title = "Title 3",
-                        description = "Description 3",
-                        isCompleted = true,
-                        id = "ID 3"
-                    ),
-                    Task(
-                        title = "Title 4",
-                        description = "Description 4",
-                        isCompleted = false,
-                        id = "ID 4"
-                    ),
-                    Task(
-                        title = "Title 5",
-                        description = "Description 5",
-                        isCompleted = true,
-                        id = "ID 5"
-                    ),
-                )
+                tasks.toExternal()
             }
         }
     }
