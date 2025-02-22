@@ -18,7 +18,6 @@ import com.velichkomarija.myapplication.TodoDestinationArgs.USER_MESSAGE_ARG
 import com.velichkomarija.myapplication.main.MainScreen
 import com.velichkomarija.myapplication.todo.TodoScreen
 import com.velichkomarija.myapplication.todo.addnew.AddOrUpdateScreen
-import com.velichkomarija.myapplication.uicomponents.AddOrUpdateTopAppBar
 
 @Composable
 fun NavGraph(
@@ -72,13 +71,16 @@ fun NavGraph(
             val taskId = entry.arguments?.getString(TASK_ID_ARG)
             AddOrUpdateScreen(
                 topBarTitle = entry.arguments?.getInt(TITLE_ARG),
-                onTaskUpdate = {
+                onUpdate = {
                     navActions.navigateToTodoList(
                         if (taskId == null) ADD_EDIT_RESULT_OK else EDIT_RESULT_OK
                     )
                 },
-                onBack = { navController.popBackStack() }
-            )
+                onBack = { navController.popBackStack() },
+                isNew = taskId == null,
+                onDelete = {
+                    navActions.navigateToTodoList(DELETE_RESULT_OK)
+                })
         }
     }
 }

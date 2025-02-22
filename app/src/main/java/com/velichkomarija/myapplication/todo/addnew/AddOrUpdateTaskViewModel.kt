@@ -43,6 +43,16 @@ class AddOrUpdateTaskViewModel @Inject constructor(
         }
     }
 
+    fun deleteTask() = viewModelScope.launch {
+        if (taskId != null) {
+            localTaskRepository.deleteTask(taskId)
+            _uiState.update {
+                it.copy(isDeleted = true)
+            }
+        }
+    }
+
+
     fun updateDescription(newDescription: String) {
         _uiState.update {
             it.copy(description = newDescription)
@@ -67,7 +77,7 @@ class AddOrUpdateTaskViewModel @Inject constructor(
     private fun createNewTask() = viewModelScope.launch {
         localTaskRepository.createTask(uiState.value.title, uiState.value.description)
         _uiState.update {
-            it.copy(isTaskSaved = true)
+            it.copy(isSaved = true)
         }
     }
 
@@ -83,7 +93,7 @@ class AddOrUpdateTaskViewModel @Inject constructor(
             )
         }
         _uiState.update {
-            it.copy(isTaskSaved = true)
+            it.copy(isSaved = true)
         }
     }
 
@@ -99,7 +109,7 @@ class AddOrUpdateTaskViewModel @Inject constructor(
                         it.copy(
                             title = task.title,
                             description = task.description,
-                            isTaskCompleted = task.isCompleted,
+                            isCompleted = task.isCompleted,
                             isLoading = false
                         )
                     }

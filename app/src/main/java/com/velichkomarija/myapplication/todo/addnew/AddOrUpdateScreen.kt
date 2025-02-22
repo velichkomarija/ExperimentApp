@@ -35,21 +35,30 @@ import com.velichkomarija.myapplication.R
 import com.velichkomarija.myapplication.ui.theme.Dimens
 import com.velichkomarija.myapplication.ui.theme.Typography
 import com.velichkomarija.myapplication.uicomponents.AddOrUpdateTopAppBar
+import com.velichkomarija.myapplication.uicomponents.TaskDetailTopAppBar
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AddOrUpdateScreen(
     @StringRes topBarTitle: Int?,
-    onTaskUpdate: () -> Unit,
+    onUpdate: () -> Unit,
     onBack: () -> Unit,
+    onDelete: () -> Unit,
+    isNew: Boolean = true,
     modifier: Modifier = Modifier,
     scaffoldState: ScaffoldState = rememberScaffoldState(),
-    viewModel: AddOrUpdateTaskViewModel = hiltViewModel()
+    viewModel: AddOrUpdateTaskViewModel = hiltViewModel(),
 ) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
         scaffoldState = scaffoldState,
-        topBar = { AddOrUpdateTopAppBar(topBarTitle, onBack) },
+        topBar = {
+            if (isNew) {
+                AddOrUpdateTopAppBar(topBarTitle, onBack)
+            } else {
+                TaskDetailTopAppBar(onBack, viewModel::deleteTask)
+            }
+        },
         floatingActionButton = {
             FloatingActionButton(onClick = viewModel::saveTask) {
                 Icon(Icons.Filled.Done, stringResource(id = R.string.save_task))
@@ -67,9 +76,15 @@ fun AddOrUpdateScreen(
             modifier = Modifier.padding(paddingValues)
         )
 
-        LaunchedEffect(uiState.isTaskSaved) {
-            if (uiState.isTaskSaved) {
-                onTaskUpdate()
+        LaunchedEffect(uiState.isSaved) {
+            if (uiState.isSaved) {
+                onUpdate()
+            }
+        }
+
+        LaunchedEffect(uiState.isDeleted) {
+            if (uiState.isDeleted) {
+                onDelete()
             }
         }
 
@@ -80,7 +95,6 @@ fun AddOrUpdateScreen(
                 viewModel.snackbarMessageShown()
             }
         }
-
     }
 }
 
@@ -101,7 +115,7 @@ private fun AddOrUpdateTaskContent(
                 refreshing = true,
                 onRefresh = { }),
         )
-    }else {
+    } else {
         Column(
             modifier
                 .fillMaxSize()

@@ -15,4 +15,6 @@
     <string name="successfully_saved_task_message">Task saved</string>
     <string name="successfully_added_task_message">Task added</string>
     <string name="successfully_deleted_task_message">Task was deleted</string>
+    <string name="task_details">Task Details</string>
+    <string name="menu_delete_task">Delete task</string>
 </resources>

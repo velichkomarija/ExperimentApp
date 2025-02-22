@@ -57,7 +57,7 @@ class TodoViewModel @Inject constructor(
         }
     }
 
-        fun completeTask(task: Task, completed: Boolean) = viewModelScope.launch {
+    fun completeTask(task: Task, completed: Boolean) = viewModelScope.launch {
         if (completed) {
             localTaskRepository.completeTask(task.id)
             // showSnackbar
