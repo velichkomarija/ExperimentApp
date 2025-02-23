@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">EveryDay Kit</string>
     <string name="photo_description">Personal photo</string>
     <string name="personal_name">Maria Velichko</string>
     <string name="vk_link_description">VK</string>
     <string name="telegram_link_description">Telegram</string>
     <string name="menu_back">Back</string>
     <!-- Tasks !-->
+    <string name="todo_list_app">Todo list</string>
     <string name="add_task">Add new task</string>
     <string name="edit_task">Edit task</string>
     <string name="empty_task_message">Task cannot be empty</string>

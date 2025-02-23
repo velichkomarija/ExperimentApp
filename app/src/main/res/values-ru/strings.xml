@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">EveryDay Kit</string>
+    <string name="photo_description">Фото</string>
+    <string name="personal_name">Мария Величко</string>
+    <string name="vk_link_description">VK</string>
+    <string name="telegram_link_description">Telegram</string>
+    <string name="menu_back">Назад</string>
+    <!-- Tasks !-->
+    <string name="todo_list_app">Трекер задач</string>
+    <string name="add_task">Добавить новую задачу</string>
+    <string name="edit_task">Редактировать задачу</string>
+    <string name="empty_task_message">Задача не может быьб пустой</string>
+    <string name="save_task">Сохранить задачуk</string>
+    <string name="title_hint">Заголовок</string>
+    <string name="description_hint">Введите описание</string>
+    <string name="successfully_saved_task_message">Задача сохранена</string>
+    <string name="successfully_added_task_message">Задача создана</string>
+    <string name="successfully_deleted_task_message">Задача удалена</string>
+    <string name="task_details">Детали задачи</string>
+    <string name="menu_delete_task">Удалить задачу</string>
+</resources>
