@@ -11,13 +11,19 @@ plugins {
 android {
     namespace = "com.velichkomarija.everydaykit"
     compileSdk = 34
+    val versionMajor = 0
+    val versionMinor = 1
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         applicationId = "com.velichkomarija.everydaykit"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
-        versionName = "0.1"
+        versionName = "${versionMajor}.${versionMinor}.${versionCode}"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -26,12 +32,22 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
+            buildConfigField("String", "BUILD_TYPE", "\"debug\"")
             isMinifyEnabled = false
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
+        }
+
+        release {
+            buildConfigField("String", "BUILD_TYPE", "\"release\"")
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 

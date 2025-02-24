@@ -19,3 +19,17 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Jetpack Compose
+-keep class androidx.compose.** { *; }
+-keep class androidx.lifecycle.** { *; }
+-keepclassmembers class androidx.lifecycle.LifecycleOwner { *; }
+
+# Для LocalLifecycleOwner
+-keepclassmembers class androidx.compose.runtime.CompositionLocalKt { *; }
+
+# Сохраняем LocalLifecycleOwner в релизе
+-keepclassmembers class androidx.compose.ui.platform.LocalLifecycleOwner { *; }
+
+# Убираем агрессивные оптимизации
+-dontoptimize

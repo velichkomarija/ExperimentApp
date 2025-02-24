@@ -58,6 +58,7 @@ fun NavGraph(
                 },
                 onAddNewTask = { navActions.navigateToAddOrUpdateTask(R.string.add_task, null) },
                 onUserMessageDisplayed = { entry.arguments?.putInt(USER_MESSAGE_ARG, 0) },
+                onBack = { navController.popBackStack() },
             )
         }
 

@@ -21,6 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velichkomarija.everydaykit.R
 import com.velichkomarija.everydaykit.data.todo.Task
+import com.velichkomarija.everydaykit.uicomponents.TodoTopAppBar
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -29,6 +30,7 @@ fun TodoScreen(
     onTaskClick: (Task) -> Unit,
     onAddNewTask: () -> Unit,
     onUserMessageDisplayed: () -> Unit,
+    onBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: TodoViewModel = hiltViewModel(),
     scaffoldState: ScaffoldState = rememberScaffoldState()
@@ -39,7 +41,8 @@ fun TodoScreen(
             FloatingActionButton(onClick = onAddNewTask) {
                 Icon(Icons.Filled.Add, stringResource(id = R.string.add_task))
             }
-        }
+        },
+        topBar ={ TodoTopAppBar(onBack)}
     ) { paddingValues ->
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 

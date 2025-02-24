@@ -16,6 +16,21 @@ import androidx.compose.ui.res.stringResource
 import com.velichkomarija.everydaykit.R
 
 @Composable
+fun TodoTopAppBar(onBack: () -> Unit) {
+    TopAppBar(
+        title = {
+            Text(text = stringResource(id = R.string.todo_list_app))
+        },
+        navigationIcon = {
+            IconButton(onClick = onBack) {
+                Icon(Icons.AutoMirrored.Outlined.ArrowBack, stringResource(id = R.string.menu_back))
+            }
+        },
+        modifier = Modifier.fillMaxWidth()
+    )
+}
+
+@Composable
 fun AddOrUpdateTopAppBar(@StringRes title: Int?, onBack: () -> Unit) {
     TopAppBar(
         title = {

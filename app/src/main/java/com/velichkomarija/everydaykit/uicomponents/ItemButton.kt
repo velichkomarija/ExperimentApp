@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.velichkomarija.everydaykit.ui.theme.Dimens
 import com.velichkomarija.everydaykit.ui.theme.MyApplicationTheme
 import com.velichkomarija.everydaykit.ui.theme.Typography
 
@@ -25,7 +26,7 @@ fun ItemButton(
     Button(
         onClick = onClick,
         shape = RoundedCornerShape(8.dp),
-        modifier = modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp)
+        modifier = modifier.padding(Dimens.LargePadding)
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(

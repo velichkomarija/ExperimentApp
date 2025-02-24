@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.velichkomarija.everydaykit.BuildUtils
 import com.velichkomarija.everydaykit.main.MainActivityUiState.Success
 import com.velichkomarija.everydaykit.uicomponents.ItemButton
 
@@ -25,9 +26,11 @@ fun MainScreen(
             .background(MaterialTheme.colorScheme.background)
     ) {
         if (uiState is Success) {
-            Greeting(
-                userData = (uiState as Success).userData,
-            )
+            if (BuildUtils.isDebug()) {
+                Greeting(
+                    userData = (uiState as Success).userData,
+                )
+            }
             LazyColumn {
                 (uiState as Success).functions.forEach { functionData ->
                     item {

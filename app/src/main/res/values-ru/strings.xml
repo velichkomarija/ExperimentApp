@@ -9,7 +9,7 @@
     <string name="todo_list_app">Трекер задач</string>
     <string name="add_task">Добавить новую задачу</string>
     <string name="edit_task">Редактировать задачу</string>
-    <string name="empty_task_message">Задача не может быьб пустой</string>
+    <string name="empty_task_message">Задача не может быть пустой</string>
     <string name="save_task">Сохранить задачуk</string>
     <string name="title_hint">Заголовок</string>
     <string name="description_hint">Введите описание</string>
