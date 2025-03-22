@@ -18,4 +18,15 @@
     <string name="successfully_deleted_task_message">Задача удалена</string>
     <string name="task_details">Детали задачи</string>
     <string name="menu_delete_task">Удалить задачу</string>
+    <string name="list_filter">Фильтр</string>
+    <string name="nav_all">Все</string>
+    <string name="nav_active">Активные</string>
+    <string name="nav_completed">Выполненные</string>
+    <string name="label_all">Все задачи</string>
+    <string name="label_active">Активные задачи</string>
+    <string name="label_completed">Выполненные задачи</string>
+    <string name="no_tasks_all">У вас нет задач!</string>
+    <string name="no_tasks_active">У вас нет активных задач!</string>
+    <string name="no_tasks_completed">У вас нет сделанных задач!</string>
+    <string name="loading_tasks_error">Ошибка загрузки задач</string>
 </resources>
