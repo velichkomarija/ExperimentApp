@@ -20,7 +20,6 @@ import com.velichkomarija.everydaykit.ui.theme.Typography
 
 @Composable
 fun TasksContent(
-    loading: Boolean,
     tasks: List<Task>,
     onTaskClick: (Task) -> Unit,
     onTaskCheckedChange: (Task, Boolean) -> Unit,

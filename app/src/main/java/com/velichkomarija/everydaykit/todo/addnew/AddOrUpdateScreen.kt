@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterialApi::class)
-
 package com.velichkomarija.everydaykit.todo.addnew
 
 import androidx.annotation.StringRes
@@ -10,21 +8,19 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
-import androidx.compose.material.ScaffoldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
-import androidx.compose.material.pullrefresh.PullRefreshIndicator
-import androidx.compose.material.pullrefresh.rememberPullRefreshState
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -37,7 +33,6 @@ import com.velichkomarija.everydaykit.ui.theme.Typography
 import com.velichkomarija.everydaykit.uicomponents.AddOrUpdateTopAppBar
 import com.velichkomarija.everydaykit.uicomponents.TaskDetailTopAppBar
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AddOrUpdateScreen(
     @StringRes topBarTitle: Int?,
@@ -46,12 +41,13 @@ fun AddOrUpdateScreen(
     onDelete: () -> Unit,
     isNew: Boolean = true,
     modifier: Modifier = Modifier,
-    scaffoldState: ScaffoldState = rememberScaffoldState(),
     viewModel: AddOrUpdateTaskViewModel = hiltViewModel(),
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
+
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        scaffoldState = scaffoldState,
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             if (isNew) {
                 AddOrUpdateTopAppBar(topBarTitle, onBack)
@@ -68,7 +64,6 @@ fun AddOrUpdateScreen(
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
         AddOrUpdateTaskContent(
-            loading = uiState.isLoading,
             title = uiState.title,
             description = uiState.description,
             onTitleChanged = viewModel::updateTitle,
@@ -90,60 +85,54 @@ fun AddOrUpdateScreen(
 
         uiState.userMessage?.let { userMessage ->
             val snackbarText = stringResource(userMessage)
-            LaunchedEffect(scaffoldState, viewModel, userMessage, snackbarText) {
-                scaffoldState.snackbarHostState.showSnackbar(snackbarText)
+            LaunchedEffect(snackbarHostState, viewModel, userMessage, snackbarText) {
+                snackbarHostState.showSnackbar(snackbarText)
                 viewModel.snackbarMessageShown()
             }
         }
     }
 }
 
-@ExperimentalMaterialApi
 @Composable
 private fun AddOrUpdateTaskContent(
-    loading: Boolean,
     title: String,
     description: String,
     onTitleChanged: (String) -> Unit,
     onDescriptionChanged: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    if (loading) {
-        PullRefreshIndicator(
-            refreshing = true,
-            state = rememberPullRefreshState(
-                refreshing = true,
-                onRefresh = { }),
+    Column(
+        modifier
+            .fillMaxSize()
+            .padding(all = Dimens.LargePadding)
+            .verticalScroll(rememberScrollState())
+    ) {
+        OutlinedTextField(
+            value = title,
+            onValueChange = onTitleChanged,
+            modifier = Modifier.fillMaxWidth(),
+            placeholder = {
+                Text(
+                    text = stringResource(id = R.string.title_hint),
+                    style = Typography.headlineLarge
+                )
+            },
+            textStyle = Typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
+            maxLines = 2
         )
-    } else {
-        Column(
-            modifier
-                .fillMaxSize()
-                .padding(all = Dimens.LargePadding)
-                .verticalScroll(rememberScrollState())
-        ) {
-            OutlinedTextField(
-                value = title,
-                onValueChange = onTitleChanged,
-                modifier = Modifier.fillMaxWidth(),
-                placeholder = {
-                    Text(
-                        text = stringResource(id = R.string.title_hint),
-                        style = Typography.headlineLarge
-                    )
-                },
-                textStyle = Typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
-                maxLines = 2
-            )
 
-            OutlinedTextField(
-                value = description,
-                onValueChange = onDescriptionChanged,
-                placeholder = { androidx.compose.material.Text(stringResource(id = R.string.description_hint)) },
-                modifier = Modifier
-                    .height(360.dp)
-                    .fillMaxWidth(),
-            )
-        }
+        OutlinedTextField(
+            value = description,
+            onValueChange = onDescriptionChanged,
+            placeholder = {
+                Text(
+                    stringResource(id = R.string.description_hint),
+                    style = Typography.bodyMedium
+                )
+            },
+            modifier = Modifier
+                .height(360.dp)
+                .fillMaxWidth(),
+        )
     }
 }

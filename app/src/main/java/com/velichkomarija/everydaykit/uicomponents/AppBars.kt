@@ -2,19 +2,20 @@ package com.velichkomarija.everydaykit.uicomponents
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
-import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.velichkomarija.everydaykit.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TodoTopAppBar(onBack: () -> Unit) {
     TopAppBar(
@@ -30,6 +31,7 @@ fun TodoTopAppBar(onBack: () -> Unit) {
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddOrUpdateTopAppBar(@StringRes title: Int?, onBack: () -> Unit) {
     TopAppBar(
@@ -49,6 +51,7 @@ fun AddOrUpdateTopAppBar(@StringRes title: Int?, onBack: () -> Unit) {
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskDetailTopAppBar(onBack: () -> Unit, onDelete: () -> Unit) {
     TopAppBar(
@@ -57,7 +60,7 @@ fun TaskDetailTopAppBar(onBack: () -> Unit, onDelete: () -> Unit) {
         },
         navigationIcon = {
             IconButton(onClick = onBack) {
-                Icon(Icons.Outlined.ArrowBack, stringResource(id = R.string.menu_back))
+                Icon(Icons.AutoMirrored.Outlined.ArrowBack, stringResource(id = R.string.menu_back))
             }
         },
         actions = {

@@ -4,16 +4,17 @@ import android.annotation.SuppressLint
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.rememberScaffoldState
-import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -33,21 +34,22 @@ fun TodoScreen(
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: TodoViewModel = hiltViewModel(),
-    scaffoldState: ScaffoldState = rememberScaffoldState()
 ) {
-    Scaffold(scaffoldState = scaffoldState,
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    Scaffold(
         modifier = modifier.fillMaxSize(),
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         floatingActionButton = {
             FloatingActionButton(onClick = onAddNewTask) {
                 Icon(Icons.Filled.Add, stringResource(id = R.string.add_task))
             }
         },
-        topBar ={ TodoTopAppBar(onBack)}
+        topBar = { TodoTopAppBar(onBack) }
     ) { paddingValues ->
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
         TasksContent(
-            loading = uiState.isLoading,
             tasks = uiState.items,
             onTaskClick = onTaskClick,
             onTaskCheckedChange = viewModel::completeTask,
@@ -56,8 +58,8 @@ fun TodoScreen(
 
         uiState.userMessage?.let { message ->
             val snackbarText = stringResource(message)
-            LaunchedEffect(scaffoldState, viewModel, message, snackbarText) {
-                scaffoldState.snackbarHostState.showSnackbar(snackbarText)
+            LaunchedEffect(snackbarHostState, viewModel, message, snackbarText) {
+                snackbarHostState.showSnackbar(snackbarText)
                 viewModel.snackbarMessageShown()
             }
         }

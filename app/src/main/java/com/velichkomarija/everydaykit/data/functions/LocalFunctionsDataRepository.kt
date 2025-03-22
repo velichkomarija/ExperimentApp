@@ -6,7 +6,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-
 class LocalFunctionsDataRepository(@ApplicationContext context: Context) : FunctionsDataRepository {
     private val example = listOf(
         FunctionData(context.getString(R.string.todo_list_app), null, "TodoList"),
