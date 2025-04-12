@@ -10,9 +10,9 @@ plugins {
 
 android {
     namespace = "com.velichkomarija.everydaykit"
-    compileSdk = 34
+    compileSdk = 35
     val versionMajor = 0
-    val versionMinor = 1
+    val versionMinor = 2
 
     buildFeatures {
         buildConfig = true
@@ -21,8 +21,8 @@ android {
     defaultConfig {
         applicationId = "com.velichkomarija.everydaykit"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
+        targetSdk = 35
+        versionCode = 3
         versionName = "${versionMajor}.${versionMinor}.${versionCode}"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
