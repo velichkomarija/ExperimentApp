@@ -45,7 +45,13 @@ fun TodoScreen(
                 Icon(Icons.Filled.Add, stringResource(id = R.string.add_task))
             }
         },
-        topBar = { TodoTopAppBar(onBack) }
+        topBar = {
+            TodoTopAppBar(onBack = onBack,
+                onFilterCompletedTasks = { viewModel.setFiltering(TaskFilterType.COMPLETED_TASKS) },
+                onFilterAllTasks = { viewModel.setFiltering(TaskFilterType.ALL_TASKS) },
+                onFilterActiveTasks = { viewModel.setFiltering(TaskFilterType.ACTIVE_TASKS) }
+            )
+        }
     ) { paddingValues ->
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -53,7 +59,10 @@ fun TodoScreen(
             tasks = uiState.items,
             onTaskClick = onTaskClick,
             onTaskCheckedChange = viewModel::completeTask,
-            modifier = Modifier.padding(paddingValues)
+            modifier = Modifier.padding(paddingValues),
+            currentFilteringLabel = uiState.filteringUiInfo.currentFilteringLabel,
+            noTasksLabel = uiState.filteringUiInfo.noTasksLabel,
+            noTasksIconRes = uiState.filteringUiInfo.noTaskIconRes
         )
 
         uiState.userMessage?.let { message ->
