@@ -16,6 +16,8 @@
     <string name="successfully_saved_task_message">Задача сохранена</string>
     <string name="successfully_added_task_message">Задача создана</string>
     <string name="successfully_deleted_task_message">Задача удалена</string>
+    <string name="successfully_activated_task_message">Задача снова активирована</string>
+    <string name="successfully_completed_task_message">Задача выполнена</string>
     <string name="task_details">Детали задачи</string>
     <string name="menu_delete_task">Удалить задачу</string>
     <string name="list_filter">Фильтр</string>

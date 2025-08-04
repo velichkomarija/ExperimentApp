@@ -15,7 +15,9 @@
     <string name="description_hint">Enter your task here.</string>
     <string name="successfully_saved_task_message">Task saved</string>
     <string name="successfully_added_task_message">Task added</string>
-    <string name="successfully_deleted_task_message">Task was deleted</string>
+    <string name="successfully_deleted_task_message">Task deleted</string>
+    <string name="successfully_activated_task_message">Task activated</string>
+    <string name="successfully_completed_task_message">Task completed</string>
     <string name="task_details">Task Details</string>
     <string name="menu_delete_task">Delete task</string>
     <string name="list_filter">Filter</string>

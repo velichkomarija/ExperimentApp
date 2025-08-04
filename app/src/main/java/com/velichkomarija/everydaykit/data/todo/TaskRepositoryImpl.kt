@@ -67,14 +67,14 @@ class TaskRepositoryImpl @Inject constructor(
         networkSource.saveOrUpdateTask(task)
     }
 
-    override suspend fun completeTask(taskId: String) {
+    override suspend fun completeTask(taskId: String) : Boolean {
         localDataSource.updateCompleted(taskId = taskId, completed = true)
-        networkSource.updateCompleted(taskId = taskId, completed = true)
+       return networkSource.updateCompleted(taskId = taskId, completed = true)
     }
 
-    override suspend fun activateTask(taskId: String) {
+    override suspend fun activateTask(taskId: String) : Boolean {
         localDataSource.updateCompleted(taskId = taskId, completed = false)
-        networkSource.updateCompleted(taskId = taskId, completed = false)
+         return networkSource.updateCompleted(taskId = taskId, completed = false)
     }
 
     override suspend fun clearCompletedTasks() {
@@ -92,12 +92,10 @@ class TaskRepositoryImpl @Inject constructor(
         networkSource.deleteTask(taskId)
     }
 
-    override suspend fun saveTasksRemote() {
-        scope.launch {
+    override suspend fun saveTasksRemote(): Boolean {
+        return withContext(dispatcher)  {
             val localTask = localDataSource.getAll().toExternal()
             networkSource.saveTasks(localTask)
         }
     }
-
-
 }

@@ -3,7 +3,9 @@ package com.velichkomarija.everydaykit.todo_app
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.velichkomarija.everydaykit.ACTIVATE_RESULT_OK
 import com.velichkomarija.everydaykit.ADD_EDIT_RESULT_OK
+import com.velichkomarija.everydaykit.COMPLETE_RESULT_OK
 import com.velichkomarija.everydaykit.DELETE_RESULT_OK
 import com.velichkomarija.everydaykit.EDIT_RESULT_OK
 import com.velichkomarija.everydaykit.R
@@ -44,7 +46,7 @@ class TodoViewModel @Inject constructor(
     val uiState: StateFlow<TodoTasksUIState> = combine(
         _filterUiInfo, _isLoading, _userMessage, _filteredTasksAsync
     )
-    { filterUiInfo, _, userMessage, filteredTasksAsync ->
+    { filterUiInfo, isLoading, userMessage, filteredTasksAsync ->
         when (filteredTasksAsync) {
             Async.Loading -> {
                 TodoTasksUIState(isLoading = true)
@@ -55,11 +57,10 @@ class TodoViewModel @Inject constructor(
             }
 
             is Async.Success -> {
-              //  taskRepository.saveTasksRemote()
                 TodoTasksUIState(
                     items = filteredTasksAsync.data,
                     filteringUiInfo = filterUiInfo,
-                    isLoading = false,
+                    isLoading = !taskRepository.saveTasksRemote(),
                     userMessage = userMessage
                 )
             }
@@ -83,16 +84,22 @@ class TodoViewModel @Inject constructor(
             EDIT_RESULT_OK -> showSnackbarMessage(R.string.successfully_saved_task_message)
             ADD_EDIT_RESULT_OK -> showSnackbarMessage(R.string.successfully_added_task_message)
             DELETE_RESULT_OK -> showSnackbarMessage(R.string.successfully_deleted_task_message)
+            COMPLETE_RESULT_OK -> showSnackbarMessage(R.string.successfully_completed_task_message)
+            ACTIVATE_RESULT_OK -> showSnackbarMessage(R.string.successfully_activated_task_message)
         }
     }
 
     fun completeTask(task: Task, completed: Boolean) = viewModelScope.launch {
         if (completed) {
-            taskRepository.completeTask(task.id)
-            // showSnackbar
+            val result = taskRepository.completeTask(task.id)
+            if (result) {
+                showEditResultMessage(COMPLETE_RESULT_OK)
+            }
         } else {
-            taskRepository.activateTask(task.id)
-            // showSnackbar
+            val result = taskRepository.activateTask(task.id)
+            if (result) {
+                showEditResultMessage(ACTIVATE_RESULT_OK)
+            }
         }
     }
 

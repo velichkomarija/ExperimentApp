@@ -89,3 +89,5 @@ fun NavGraph(
 const val ADD_EDIT_RESULT_OK = Activity.RESULT_FIRST_USER + 1
 const val DELETE_RESULT_OK = Activity.RESULT_FIRST_USER + 2
 const val EDIT_RESULT_OK = Activity.RESULT_FIRST_USER + 3
+const val COMPLETE_RESULT_OK = Activity.RESULT_FIRST_USER + 4
+const val ACTIVATE_RESULT_OK = Activity.RESULT_FIRST_USER + 5

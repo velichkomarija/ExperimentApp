@@ -9,10 +9,10 @@ interface TaskRepository {
     suspend fun getTask(taskId: String): Task?
     suspend fun createTask(title: String, description: String): String
     suspend fun updateTask(taskId: String, title: String, description: String)
-    suspend fun completeTask(taskId: String)
-    suspend fun activateTask(taskId: String)
+    suspend fun completeTask(taskId: String) : Boolean
+    suspend fun activateTask(taskId: String): Boolean
     suspend fun clearCompletedTasks()
     suspend fun deleteAllTasks()
     suspend fun deleteTask(taskId: String)
-    suspend fun saveTasksRemote()
+    suspend fun saveTasksRemote(): Boolean
 }
