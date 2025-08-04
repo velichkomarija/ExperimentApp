@@ -16,8 +16,8 @@ import com.velichkomarija.everydaykit.TodoDestinationArgs.TASK_ID_ARG
 import com.velichkomarija.everydaykit.TodoDestinationArgs.TITLE_ARG
 import com.velichkomarija.everydaykit.TodoDestinationArgs.USER_MESSAGE_ARG
 import com.velichkomarija.everydaykit.main.MainScreen
-import com.velichkomarija.everydaykit.todo.TodoScreen
-import com.velichkomarija.everydaykit.todo.addnew.AddOrUpdateScreen
+import com.velichkomarija.everydaykit.todo_app.TodoScreen
+import com.velichkomarija.everydaykit.todo_app.addnew.AddOrUpdateScreen
 
 @Composable
 fun NavGraph(

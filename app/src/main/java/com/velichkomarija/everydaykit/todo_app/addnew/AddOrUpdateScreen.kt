@@ -1,4 +1,4 @@
-package com.velichkomarija.everydaykit.todo.addnew
+package com.velichkomarija.everydaykit.todo_app.addnew
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column

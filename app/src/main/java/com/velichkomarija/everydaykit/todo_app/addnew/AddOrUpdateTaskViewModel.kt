@@ -1,11 +1,11 @@
-package com.velichkomarija.everydaykit.todo.addnew
+package com.velichkomarija.everydaykit.todo_app.addnew
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.velichkomarija.everydaykit.R
 import com.velichkomarija.everydaykit.TodoDestinationArgs
-import com.velichkomarija.everydaykit.data.todo.LocalTaskRepository
+import com.velichkomarija.everydaykit.data.todo.TaskRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddOrUpdateTaskViewModel @Inject constructor(
-    private val localTaskRepository: LocalTaskRepository,
+    private val localTaskRepository: TaskRepositoryImpl,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 

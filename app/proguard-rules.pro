@@ -31,5 +31,7 @@
 # Сохраняем LocalLifecycleOwner в релизе
 -keepclassmembers class androidx.compose.ui.platform.LocalLifecycleOwner { *; }
 
+-keep class com.velichkomarija.everydaykit.data.todo.Task { *; }
+
 # Убираем агрессивные оптимизации
 -dontoptimize

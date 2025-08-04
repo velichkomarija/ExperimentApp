@@ -1,4 +1,4 @@
-package com.velichkomarija.everydaykit.todo
+package com.velichkomarija.everydaykit.todo_app
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

@@ -1,4 +1,4 @@
-package com.velichkomarija.everydaykit.todo.addnew
+package com.velichkomarija.everydaykit.todo_app.addnew
 
 data class AddOrUpdateTaskUIState(
     val title: String = "",

@@ -14,12 +14,13 @@ appcompat = "1.7.0"
 androidxCoreSplashscreen = "1.0.1"
 kotlinxCoroutines = "1.8.0"
 hilt = "2.51.1"
-hiltExt = "1.2.0"
+gms = "4.4.3"
 ksp = "2.0.0-1.0.21"
 androidxBrowser = "1.8.0"
 androidxNavigation = "2.5.3"
 androidxLifecycle = "2.6.0-alpha03"
 room = "2.5.0-rc01"
+firebase-bom = "34.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -57,6 +58,9 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
+firebase-auth = { module = "com.google.firebase:firebase-auth" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -65,3 +69,4 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+gms = {id = "com.google.gms.google-services", version.ref = "gms"}

@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.compose)
+    alias(libs.plugins.gms)
 }
 
 android {
@@ -34,7 +35,8 @@ android {
         debug {
             buildConfigField("String", "BUILD_TYPE", "\"debug\"")
             isMinifyEnabled = false
-            applicationIdSuffix = ".debug"
+            //todo для дебаг варианта сгенерировать свой google-service
+       //     applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
         }
 
@@ -66,6 +68,7 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    buildToolsVersion = "34.0.0"
 }
 
 java {
@@ -97,6 +100,9 @@ dependencies {
     implementation(libs.androidx.browser)
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.lifecycle.viewModelCompose)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.auth)
 
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)

@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.velichkomarija.everydaykit.data.todo.db.TaskDao
 import com.velichkomarija.everydaykit.data.todo.db.TaskDatabase
+import com.velichkomarija.everydaykit.data.todo.network.FirestoreDataSource
+import com.velichkomarija.everydaykit.data.todo.network.NetworkSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,4 +29,11 @@ object DatabaseModule {
 
     @Provides
     fun provideTaskDao(database: TaskDatabase): TaskDao = database.taskDao()
+
+    @Provides
+    fun provideAuthService(): AuthService = AuthService()
+
+    @Provides
+    fun provideNetworkSource(): NetworkSource = FirestoreDataSource(provideAuthService())
+
 }

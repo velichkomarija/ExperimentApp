@@ -1,4 +1,4 @@
-package com.velichkomarija.everydaykit.todo
+package com.velichkomarija.everydaykit.todo_app
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -7,8 +7,9 @@ import com.velichkomarija.everydaykit.ADD_EDIT_RESULT_OK
 import com.velichkomarija.everydaykit.DELETE_RESULT_OK
 import com.velichkomarija.everydaykit.EDIT_RESULT_OK
 import com.velichkomarija.everydaykit.R
-import com.velichkomarija.everydaykit.data.todo.LocalTaskRepository
+import com.velichkomarija.everydaykit.data.todo.TaskRepositoryImpl
 import com.velichkomarija.everydaykit.data.todo.Task
+import com.velichkomarija.everydaykit.todo.TaskFilterType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -23,7 +24,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TodoViewModel @Inject constructor(
-    private val localTaskRepository: LocalTaskRepository,
+    private val taskRepository: TaskRepositoryImpl,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -34,7 +35,7 @@ class TodoViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(false)
     private val _userMessage: MutableStateFlow<Int?> = MutableStateFlow(null)
     private val _filteredTasksAsync =
-        combine(localTaskRepository.getTasksFlow(), _savedFilterType) { tasks, type ->
+        combine(taskRepository.getTasksFlow(), _savedFilterType) { tasks, type ->
             filterTasks(tasks, type)
         }
             .map { Async.Success(it) }
@@ -54,6 +55,7 @@ class TodoViewModel @Inject constructor(
             }
 
             is Async.Success -> {
+              //  taskRepository.saveTasksRemote()
                 TodoTasksUIState(
                     items = filteredTasksAsync.data,
                     filteringUiInfo = filterUiInfo,
@@ -86,10 +88,10 @@ class TodoViewModel @Inject constructor(
 
     fun completeTask(task: Task, completed: Boolean) = viewModelScope.launch {
         if (completed) {
-            localTaskRepository.completeTask(task.id)
+            taskRepository.completeTask(task.id)
             // showSnackbar
         } else {
-            localTaskRepository.activateTask(task.id)
+            taskRepository.activateTask(task.id)
             // showSnackbar
         }
     }

@@ -31,15 +31,19 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val viewModel: MainActivityViewModel by viewModels()
 
+    @Inject
+    lateinit var authService: AuthService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-
+        authService.checkUser()
         var uiState: MainActivityUiState by mutableStateOf(Loading)
         // Обновляем UI
         lifecycleScope.launch {
@@ -74,6 +78,8 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+
 }
 
 @Preview(showBackground = true)

@@ -16,9 +16,16 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://maven.google.com/snapshots")
+            content {
+                includeGroupByRegex("com\\.google\\.firebase.*")
+                includeGroupByRegex("com\\.google\\.android.*")
+            }
+        }
     }
 }
 
-rootProject.name = "My Application"
-include(":app")
+    rootProject.name = "My Application"
+    include(":app")
  

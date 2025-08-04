@@ -1,4 +1,4 @@
-package com.velichkomarija.everydaykit.todo
+package com.velichkomarija.everydaykit.todo_app
 
 import com.velichkomarija.everydaykit.R
 import com.velichkomarija.everydaykit.data.todo.Task

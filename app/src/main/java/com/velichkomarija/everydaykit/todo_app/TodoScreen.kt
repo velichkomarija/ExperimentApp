@@ -1,4 +1,4 @@
-package com.velichkomarija.everydaykit.todo
+package com.velichkomarija.everydaykit.todo_app
 
 import android.annotation.SuppressLint
 import androidx.annotation.StringRes
@@ -22,6 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velichkomarija.everydaykit.R
 import com.velichkomarija.everydaykit.data.todo.Task
+import com.velichkomarija.everydaykit.todo.TaskFilterType
 import com.velichkomarija.everydaykit.uicomponents.TodoTopAppBar
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
