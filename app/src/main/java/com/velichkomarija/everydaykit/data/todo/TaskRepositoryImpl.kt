@@ -9,8 +9,10 @@ import com.velichkomarija.everydaykit.data.todo.network.NetworkSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.UUID
 import javax.inject.Inject
@@ -22,17 +24,19 @@ class TaskRepositoryImpl @Inject constructor(
     private val networkSource: NetworkSource,
 ) : TaskRepository {
 
-    override fun getTasksFlow(): Flow<List<Task>> {
-        return localDataSource.observeAll().map { tasks ->
-            withContext(dispatcher) {
+    override fun getTasksFlow(): Flow<List<Task>> = flow {
+        loadTasksFromRemote()
+        emitAll(
+            localDataSource.observeAll().map { tasks ->
                 tasks.toExternal()
-            }
-        }
+            }.flowOn(dispatcher)
+        )
     }
 
-    override suspend fun getTasks(): List<Task> {
-        return withContext(dispatcher) {
-            localDataSource.getAll().toExternal()
+    override suspend fun loadTasksFromRemote() {
+        val tasks = networkSource.loadTasks()?.map { it.toEntity() }
+        if (tasks != null) {
+            localDataSource.upsertAll(tasks)
         }
     }
 
@@ -67,14 +71,14 @@ class TaskRepositoryImpl @Inject constructor(
         networkSource.saveOrUpdateTask(task)
     }
 
-    override suspend fun completeTask(taskId: String) : Boolean {
+    override suspend fun completeTask(taskId: String): Boolean {
         localDataSource.updateCompleted(taskId = taskId, completed = true)
-       return networkSource.updateCompleted(taskId = taskId, completed = true)
+        return networkSource.updateCompleted(taskId = taskId, completed = true)
     }
 
-    override suspend fun activateTask(taskId: String) : Boolean {
+    override suspend fun activateTask(taskId: String): Boolean {
         localDataSource.updateCompleted(taskId = taskId, completed = false)
-         return networkSource.updateCompleted(taskId = taskId, completed = false)
+        return networkSource.updateCompleted(taskId = taskId, completed = false)
     }
 
     override suspend fun clearCompletedTasks() {
@@ -93,7 +97,7 @@ class TaskRepositoryImpl @Inject constructor(
     }
 
     override suspend fun saveTasksRemote(): Boolean {
-        return withContext(dispatcher)  {
+        return withContext(dispatcher) {
             val localTask = localDataSource.getAll().toExternal()
             networkSource.saveTasks(localTask)
         }

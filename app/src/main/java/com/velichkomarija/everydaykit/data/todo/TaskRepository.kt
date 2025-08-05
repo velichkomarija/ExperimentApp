@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface TaskRepository {
     fun getTasksFlow(): Flow<List<Task>>
-    suspend fun getTasks(): List<Task>
+    suspend fun loadTasksFromRemote()
     fun getTaskStream(taskId: String): Flow<Task?>
     suspend fun getTask(taskId: String): Task?
     suspend fun createTask(title: String, description: String): String

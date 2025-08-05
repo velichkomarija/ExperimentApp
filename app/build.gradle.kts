@@ -13,7 +13,7 @@ android {
     namespace = "com.velichkomarija.everydaykit"
     compileSdk = 35
     val versionMajor = 0
-    val versionMinor = 2
+    val versionMinor = 3
 
     buildFeatures {
         buildConfig = true

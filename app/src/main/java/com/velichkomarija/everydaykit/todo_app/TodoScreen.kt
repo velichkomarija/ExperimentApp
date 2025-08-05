@@ -2,6 +2,7 @@ package com.velichkomarija.everydaykit.todo_app
 
 import android.annotation.SuppressLint
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -59,17 +60,22 @@ fun TodoScreen(
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
         if (uiState.isLoading) {
-            CircularProgressIndicator()
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
         } else {
-            TasksContent(
-                tasks = uiState.items,
-                onTaskClick = onTaskClick,
-                onTaskCheckedChange = viewModel::completeTask,
-                modifier = Modifier.padding(paddingValues),
-                currentFilteringLabel = uiState.filteringUiInfo.currentFilteringLabel,
-                noTasksLabel = uiState.filteringUiInfo.noTasksLabel,
-                noTasksIconRes = uiState.filteringUiInfo.noTaskIconRes
-            )
+        TasksContent(
+            tasks = uiState.items,
+            onTaskClick = onTaskClick,
+            onTaskCheckedChange = viewModel::completeTask,
+            modifier = Modifier.padding(paddingValues),
+            currentFilteringLabel = uiState.filteringUiInfo.currentFilteringLabel,
+            noTasksLabel = uiState.filteringUiInfo.noTasksLabel,
+            noTasksIconRes = uiState.filteringUiInfo.noTaskIconRes
+        )
         }
 
         uiState.userMessage?.let { message ->

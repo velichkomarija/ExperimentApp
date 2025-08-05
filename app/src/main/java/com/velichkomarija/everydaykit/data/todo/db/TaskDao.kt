@@ -37,6 +37,4 @@ interface TaskDao {
 
     @Query("DELETE FROM task WHERE isCompleted = 1")
     suspend fun deleteCompleted(): Int
-
-
 }

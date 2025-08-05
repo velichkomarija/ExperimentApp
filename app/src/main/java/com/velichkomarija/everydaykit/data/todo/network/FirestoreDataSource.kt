@@ -13,11 +13,6 @@ class FirestoreDataSource(private val authService: AuthService) : NetworkSource 
     private val tag = this.javaClass.name
     private val firestore: FirebaseFirestore = Firebase.firestore
 
-    init {
-        // сделать кнопку на загрузку из ремоута
-        // loadTasks()
-    }
-
     override fun loadTasks(): List<Task>? {
         var tasks: List<Task>? = null
         firestore

@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -27,19 +28,20 @@ import javax.inject.Inject
 @HiltViewModel
 class TodoViewModel @Inject constructor(
     private val taskRepository: TaskRepositoryImpl,
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val _savedFilterType =
         savedStateHandle.getStateFlow(TASKS_FILTER_SAVED_STATE_KEY, TaskFilterType.ALL_TASKS)
 
     private val _filterUiInfo = _savedFilterType.map { getFilterUiInfo(it) }.distinctUntilChanged()
-    private val _isLoading = MutableStateFlow(false)
+    private val _isLoading = MutableStateFlow(true)
     private val _userMessage: MutableStateFlow<Int?> = MutableStateFlow(null)
     private val _filteredTasksAsync =
         combine(taskRepository.getTasksFlow(), _savedFilterType) { tasks, type ->
             filterTasks(tasks, type)
         }
+            .onStart { Async.Loading }
             .map { Async.Success(it) }
             .catch<Async<List<Task>>> { emit(Async.Error(R.string.loading_tasks_error)) }
 
@@ -49,7 +51,7 @@ class TodoViewModel @Inject constructor(
     { filterUiInfo, isLoading, userMessage, filteredTasksAsync ->
         when (filteredTasksAsync) {
             Async.Loading -> {
-                TodoTasksUIState(isLoading = true)
+                TodoTasksUIState(isLoading = isLoading)
             }
 
             is Async.Error -> {
@@ -60,7 +62,7 @@ class TodoViewModel @Inject constructor(
                 TodoTasksUIState(
                     items = filteredTasksAsync.data,
                     filteringUiInfo = filterUiInfo,
-                    isLoading = !taskRepository.saveTasksRemote(),
+                    isLoading = false,
                     userMessage = userMessage
                 )
             }
