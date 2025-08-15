@@ -15,13 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velichkomarija.everydaykit.BuildUtils
+import com.velichkomarija.everydaykit.NavigateActions
 import com.velichkomarija.everydaykit.main.MainActivityUiState.Success
 import com.velichkomarija.everydaykit.uicomponents.ItemButton
 
 @Composable
 fun MainScreen(
     viewModel: MainActivityViewModel = hiltViewModel(),
-    openTodoList: () -> Unit,
+    navigateActions: NavigateActions
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     Scaffold(
@@ -47,7 +48,7 @@ fun MainScreen(
                             ItemButton(
                                 title = functionData.name,
                                 description = functionData.description,
-                                onClick = { openTodoList.invoke() },
+                                onClick = { navigateActions.navigate(functionData.navigationTag) },
                                 modifier = Modifier.fillMaxSize()
                             )
                         }

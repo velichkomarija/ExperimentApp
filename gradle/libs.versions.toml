@@ -61,6 +61,9 @@ room-testing = { group = "androidx.room", name = "room-testing", version.ref = "
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
+androidx-credentials = { module = "androidx.credentials:credentials"}
+androidx-credentials-play = { module = "androidx.credentials:credentials-play-services-auth"}
+googleid = { module = "com.google.android.libraries.identity.googleid:googleid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

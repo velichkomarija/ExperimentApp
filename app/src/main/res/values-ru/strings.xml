@@ -31,4 +31,7 @@
     <string name="no_tasks_active">У вас нет активных задач!</string>
     <string name="no_tasks_completed">У вас нет сделанных задач!</string>
     <string name="loading_tasks_error">Ошибка загрузки задач</string>
+    <!-- Google auth !-->
+    <string name="google_auth">Войти с Google</string>
+    <string name="google_auth_desc">для синхронизации между устройствами</string>
 </resources>

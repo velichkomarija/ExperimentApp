@@ -3,16 +3,21 @@ package com.velichkomarija.everydaykit
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.velichkomarija.everydaykit.AppScreens.ADD_UPDATE_SCREEN
+import com.velichkomarija.everydaykit.AppScreens.GOOGLE_AUTH
 import com.velichkomarija.everydaykit.AppScreens.MAIN_SCREEN
 import com.velichkomarija.everydaykit.AppScreens.TODO_MAIN_SCREEN
-import com.velichkomarija.everydaykit.AppScreens.USER_MESSAGE_ARG
+import com.velichkomarija.everydaykit.AppScreensArgs.USER_MESSAGE_ARG
 import com.velichkomarija.everydaykit.TodoDestinationArgs.TASK_ID_ARG
 import com.velichkomarija.everydaykit.TodoDestinationArgs.TITLE_ARG
 
-private object AppScreens {
+object AppScreens {
     const val MAIN_SCREEN = "main"
     const val TODO_MAIN_SCREEN = "todo"
     const val ADD_UPDATE_SCREEN = "addOrUpdate"
+    const val GOOGLE_AUTH = "googleAuth"
+}
+
+private object AppScreensArgs {
     const val USER_MESSAGE_ARG = "userMessage"
 }
 
@@ -29,6 +34,15 @@ object AppDestination {
 }
 
 class NavigateActions(private val navController: NavHostController) {
+
+    fun navigate(tag: String) {
+        if (tag == TODO_MAIN_SCREEN) {
+            navigateToTodoList()
+        } else if (tag == GOOGLE_AUTH) {
+            //todo open
+        }
+    }
+
     fun navigateToTodoList(userMessage: Int = 0) {
         navController.navigate(
             TODO_MAIN_SCREEN.let {
@@ -38,7 +52,6 @@ class NavigateActions(private val navController: NavHostController) {
             popUpTo(navController.graph.findStartDestination().id)
             launchSingleTop = true
         }
-
     }
 
     fun navigateToAddOrUpdateTask(title: Int, taskId: String?) {

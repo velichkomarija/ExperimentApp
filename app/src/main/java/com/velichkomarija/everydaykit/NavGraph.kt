@@ -40,7 +40,7 @@ fun NavGraph(
 
         composable(AppDestination.MAIN_ROUTE) {
             MainScreen(
-                openTodoList = { navActions.navigateToTodoList() }
+                navigateActions = navActions
             )
         }
 

@@ -31,4 +31,7 @@
     <string name="no_tasks_active">You have no active tasks!</string>
     <string name="no_tasks_completed">You have no completed tasks!</string>
     <string name="loading_tasks_error">Error while loading tasks</string>
+    <!-- Google auth !-->
+    <string name="google_auth">Sign in with Google</string>
+    <string name="google_auth_desc">for syncing between devices</string>
 </resources>
