@@ -1,5 +1,7 @@
 package com.velichkomarija.everydaykit
 
+import androidx.activity.ComponentActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.velichkomarija.everydaykit.AppScreens.ADD_UPDATE_SCREEN
@@ -9,6 +11,7 @@ import com.velichkomarija.everydaykit.AppScreens.TODO_MAIN_SCREEN
 import com.velichkomarija.everydaykit.AppScreensArgs.USER_MESSAGE_ARG
 import com.velichkomarija.everydaykit.TodoDestinationArgs.TASK_ID_ARG
 import com.velichkomarija.everydaykit.TodoDestinationArgs.TITLE_ARG
+import kotlinx.coroutines.launch
 
 object AppScreens {
     const val MAIN_SCREEN = "main"
@@ -33,13 +36,18 @@ object AppDestination {
     const val ADD_OR_UPDATE_ROUTE = "$ADD_UPDATE_SCREEN/{$TITLE_ARG}?$TASK_ID_ARG={$TASK_ID_ARG}"
 }
 
-class NavigateActions(private val navController: NavHostController) {
+class NavigateActions(
+    private val navController: NavHostController,
+    private val activity: ComponentActivity
+) {
 
     fun navigate(tag: String) {
         if (tag == TODO_MAIN_SCREEN) {
             navigateToTodoList()
         } else if (tag == GOOGLE_AUTH) {
-            //todo open
+            activity.lifecycleScope.launch {
+                activity.signInWithGoogle()
+            }
         }
     }
 

@@ -1,10 +1,12 @@
 package com.velichkomarija.everydaykit
 
 import android.app.Activity
+import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -24,8 +26,9 @@ fun NavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = AppDestination.MAIN_ROUTE,
-    navActions: NavigateActions = remember(navController) {
-        NavigateActions(navController)
+    activity: ComponentActivity = LocalContext.current as ComponentActivity,
+    navActions: NavigateActions = remember(navController, activity) {
+        NavigateActions(navController, activity)
     }
 ) {
 
