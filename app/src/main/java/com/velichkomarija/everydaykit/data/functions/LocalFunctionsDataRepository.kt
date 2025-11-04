@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flow
 
 class LocalFunctionsDataRepository(@ApplicationContext context: Context) : FunctionsDataRepository {
     private val example = listOf(
-        FunctionData(context.getString(R.string.google_auth),context.getString(R.string.google_auth_desc) , GOOGLE_AUTH),
+     //   FunctionData(context.getString(R.string.google_auth),context.getString(R.string.google_auth_desc) , GOOGLE_AUTH),
         FunctionData(context.getString(R.string.todo_list_app), null, TODO_MAIN_SCREEN),
     )
 

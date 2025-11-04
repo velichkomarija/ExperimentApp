@@ -106,6 +106,7 @@ dependencies {
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play)
     implementation(libs.googleid)
+    implementation(libs.androidx.datastore.preferences)
 
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)

@@ -24,7 +24,7 @@ import com.velichkomarija.everydaykit.main.MainActivityUiState
 import com.velichkomarija.everydaykit.main.MainActivityUiState.Loading
 import com.velichkomarija.everydaykit.main.MainActivityUiState.Success
 import com.velichkomarija.everydaykit.main.MainActivityViewModel
-import com.velichkomarija.everydaykit.ui.theme.MyApplicationTheme
+import com.velichkomarija.everydaykit.ui.theme.ApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
@@ -73,7 +73,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
-            MyApplicationTheme {
+            ApplicationTheme {
                 NavGraph()
             }
         }

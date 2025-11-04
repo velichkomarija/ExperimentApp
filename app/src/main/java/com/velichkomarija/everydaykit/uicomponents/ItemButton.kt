@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.velichkomarija.everydaykit.ui.theme.Dimens
-import com.velichkomarija.everydaykit.ui.theme.MyApplicationTheme
+import com.velichkomarija.everydaykit.ui.theme.ApplicationTheme
 import com.velichkomarija.everydaykit.ui.theme.Typography
 
 @Composable
@@ -52,7 +52,7 @@ fun ItemButton(
 @Preview
 @Composable
 private fun ImageButtonPreview() {
-    MyApplicationTheme {
+    ApplicationTheme {
         Surface {
             ItemButton(
                 title = "Пример",

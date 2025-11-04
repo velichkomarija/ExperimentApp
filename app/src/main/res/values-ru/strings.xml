@@ -5,6 +5,20 @@
     <string name="vk_link_description">VK</string>
     <string name="telegram_link_description">Telegram</string>
     <string name="menu_back">Назад</string>
+    <!-- Sync !-->
+    <string name="sync_busy">Выполняется…</string>
+    <string name="sync_on">Синхронизация включена</string>
+    <string name="sync_off">Синхронизация выключена</string>
+    <string name="sync_wait">Подождите, идёт операция</string>
+    <string name="account">Аккаунт</string>
+    <string name="last_sync">последняя синхронизация</string>
+    <string name="sync_apply">Войдите в Google, чтобы синхронизировать между устройствами</string>
+    <string name="error">Ошибка</string>
+    <string name="singin_google">Войти с Google</string>
+    <string name="entering">Входим…</string>
+    <string name="sync">Синхронизация…</string>
+    <string name="do_sync">Синхронизировать…</string>
+    <string name="do_sync_off">Отключить</string>
     <!-- Tasks !-->
     <string name="todo_list_app">Трекер задач</string>
     <string name="add_task">Добавить новую задачу</string>
@@ -34,4 +48,5 @@
     <!-- Google auth !-->
     <string name="google_auth">Войти с Google</string>
     <string name="google_auth_desc">для синхронизации между устройствами</string>
+
 </resources>

@@ -5,6 +5,20 @@
     <string name="vk_link_description">VK</string>
     <string name="telegram_link_description">Telegram</string>
     <string name="menu_back">Back</string>
+    <!-- Sync !-->
+    <string name="sync_busy">In progress...</string>
+    <string name="sync_on">Synchronization is enabled</string>
+    <string name="sync_off">Synchronization is disabled</string>
+    <string name="sync_wait">Please wait, the operation is in progress</string>
+    <string name="account">Account</string>
+    <string name="last_sync">last synchronization</string>
+    <string name="sync_apply">Sign in with Google to synchronize across devices</string>
+    <string name="error">Error</string>
+    <string name="singin_google">Sign in with Google</string>
+    <string name="entering">Signing in…</string>
+    <string name="sync">Synchronization…</string>
+    <string name="do_sync">Synchronize…</string>
+    <string name="do_sync_off">Disconnect</string>
     <!-- Tasks !-->
     <string name="todo_list_app">Todo list</string>
     <string name="add_task">Add new task</string>
